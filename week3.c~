@@ -1,0 +1,11 @@
+#include<math.h>
+#include<stdio.h>
+#include<stdlib.h>
+
+void main()
+{
+ int n;
+ printf("\nEnter the number of points you want in the 2D plane:\t");
+ scanf("%d",&n);
+ int x[n],y[n];
+}

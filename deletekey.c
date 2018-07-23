@@ -15,7 +15,7 @@ void insert(int n)
 	temp=(list*)malloc(sizeof(list));
 	temp->data=n;
 	if(head==NULL){
-	    head=temp;
+		head=temp;
 		head->next=NULL;
 		tail=head;
 	}
@@ -33,13 +33,26 @@ void delete(){
 		return;
 	}
 
-	else if(head==tail){
-		head=NULL;
-		tail=head;
+	printf("\nEnter the key to be deleted:\t");
+	int n;
+	scanf("%d",&n);
+
+	temp=head;
+	//list *head1=head;
+	//list *tail1=tail;
+
+	while(temp!=NULL){
+		if(temp->next->data==n)
+			break;
+		temp=temp->next;
 	}
-	else{
-		head=head->next;
-	}
+
+	if(temp==NULL)
+		return;
+	temp->next = temp->next->next;
+
+
+
 }
 
 void traverse(){

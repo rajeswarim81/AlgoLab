@@ -5,7 +5,7 @@
 
 typedef struct List{
 	int data;
-	struct List *next;
+	struct list *next;
 }list;
 
 list *head,*tail,*temp;
@@ -15,7 +15,7 @@ void insert(int n)
 	temp=(list*)malloc(sizeof(list));
 	temp->data=n;
 	if(head==NULL){
-	    head=temp;
+		head=temp;
 		head->next=NULL;
 		tail=head;
 	}
@@ -49,11 +49,7 @@ void traverse(){
 	else{
 		temp=head;
 		while(temp!=NULL){
-			if(temp->next==NULL)
-				printf("%d\n",temp->data);
-			
-			else
-			  printf("%d->",temp->data);
+			printf("%d->",temp->data);
 			temp=temp->next;
 		}
 	}
@@ -69,10 +65,8 @@ main()
 
   int n, data;
 
-  while(1){
-
-  	printf("\n1.INSERT\n2.DELETE\n3.TRAVERSE\n4.QUIT\n");
-    scanf("%d",&n);
+  printf("1.INSERT\n2.DELETE\n3.TRAVERSE\n4.QUIT\n");
+  scanf("%d",&n);
 
   switch(n)
   {
@@ -93,7 +87,6 @@ main()
   	case 4:
   	  return;
   }
-}
   //l1 = newnode(5);
 
 }

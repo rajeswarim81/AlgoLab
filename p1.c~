@@ -1,0 +1,136 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<stdbool.h>
+
+struct node
+{
+  int data;
+  struct node *next;
+}*head, *rear, *temp;
+
+
+//create node
+struct node *create_node(n)
+{
+ struct node *np=(struct node *)malloc(sizeof(struct node));
+ np->data=n;
+ np->next=NULL;
+ return np;
+}
+
+
+//insert at the end
+void insert(struct node *np)
+{
+ if(head==NULL)
+ {
+  head=np;
+  rear=np;
+ }
+ 
+ else
+ {
+   rear->next=np;
+   rear=np;
+   
+ }
+}
+
+//delete
+int delete()
+{
+ if(head==NULL)
+  { return 0;
+  printf("\nUnderflow");
+  }
+  
+ else
+ {
+  //int p;
+  struct node *t;
+  int p,s;
+  printf("\n1.delete from begining\n2.delete from end\n");
+  scanf("%d",&p);
+  if(p==1)
+  {
+  temp=head;
+  head=head->next; 
+  s=temp->data;
+  free(temp);
+  return s;
+  } 
+ else
+ {
+  temp=head;
+  while(temp->next !=NULL)
+  {
+   t=temp;
+   temp=temp->next;
+  }
+  t->next=NULL;
+  s=temp->data;
+  free(t->next);
+  return s;
+ }
+ }
+}
+
+
+//traverse
+void traverse(struct node *t)
+{
+ struct node *current=t;
+ printf("\nThe linked list:\n");
+ while(current!=NULL)
+ {
+   printf("%d->",current->data);
+   current=current->next;
+ }
+}
+
+void main()
+{
+ head=NULL;
+ char ch='y';
+ int n,p;
+ struct node *np;
+
+ do
+ {
+ printf("\n Enter your option:");
+ //int n,p;
+ printf("\n1.insert\n2.delete\n3.traverse\n");
+ scanf("%d",&n);
+ //printf("%c",ch);
+ switch(n)
+ {
+   case 1:
+    printf("\nEnter the number:\t");
+    scanf("%d",&p);
+    np=create_node(p);
+    insert(np);
+    break;
+
+  case 2:
+   p=delete();
+   if(p!=0)
+   printf("\nThe deleted element is: %d",p);
+   break;
+
+  case 3:
+  traverse(head);
+  break;
+
+  default:
+  printf("\nInvalid choice, try again!");
+ }
+
+printf("\nDo you want to continue?\t");
+scanf(" %c",&ch);
+//printf("\nnoooo\n");
+
+}while(ch=='y');
+
+
+}

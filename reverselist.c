@@ -59,6 +59,21 @@ void traverse(){
 	}
 }
 
+void reverse()
+{
+	list *current=head;
+	list *prev=NULL, *next1;
+    
+    while(current != NULL){
+
+    	next1=current->next;
+        current->next=prev;
+    	prev=current;
+    	current=next1;
+    }
+    head=prev;
+
+}
 
 main()
 {
@@ -70,8 +85,7 @@ main()
   int n, data;
 
   while(1){
-
-  	printf("\n1.INSERT\n2.DELETE\n3.TRAVERSE\n4.QUIT\n");
+  	printf("\n1.INSERT\n2.DELETE\n3.TRAVERSE\n4.REVERSE\n5.QUIT\n");
     scanf("%d",&n);
 
   switch(n)
@@ -91,6 +105,11 @@ main()
   	  break;
 
   	case 4:
+  	  reverse();
+  	  traverse();
+  	  break;
+
+  	case 5:
   	  return;
   }
 }

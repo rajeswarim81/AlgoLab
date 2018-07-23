@@ -1,0 +1,142 @@
+#include<math.h>
+#include<stdio.h>
+#include<stdlib.h>
+
+void sort(int *arr1, int *arr2,int n);
+float distance(int x1,int x2,int y1,int y2);
+float closest(int *x, int*y,int n);
+
+int main()
+{
+ //read the points from the user
+ int n;
+ printf("\nEnter the number of points you want in the 2D plane:\t");
+ scanf("%d",&n);
+ if(n<=1)
+ {printf("\nError!!!!!!!!!!!!!!");
+  return;}
+ int x[n],y[n];
+ printf("\nEnter the coordinates of those points as x and y:\n");
+ int i;
+ for(i=0;i<n;i++)
+ {
+  printf("\n%d.\t",i+1);
+  scanf("%d",&x[i]);
+  printf("\t");
+  scanf("%d",&y[i]);
+ }
+
+//sort the array acc to their x coordinates 
+sort(x,y,n);
+
+//print the sorted array
+printf("\nThe sorted coordinates are:\n");
+for(i=0;i<n;i++)
+{
+ printf("%d\t%d\n",x[i],y[i]);
+}
+
+//find and print the closest points
+float min_d=closest(x,y,n);
+printf("\nThe minimum distance between the given points is:\t %f\n",min_d);
+}
+
+
+//sorting function
+ void sort(int *arr1,int *arr2,int n)
+ {
+    int i,j,k;
+    int swapx, swapy;
+    for(i=0;i<n-1;i++)
+    {
+     for(j=0;j<n-1-i;j++)
+     {
+      if(arr1[j]==arr1[j+1])//in case, x cood is equal, check and sort acc to y cood
+        {
+            if(arr2[j]>arr2[j+1])
+            {
+        swapx=arr1[j];
+        arr1[j]=arr1[j+1];
+        arr1[j+1]=swapx;
+        
+        swapy=arr2[j];
+        arr2[j]=arr2[j+1];
+        arr2[j+1]=swapy;
+            }
+        }
+      else if(arr1[j]>arr1[j+1])//if x cood are distinct
+      {
+        swapx=arr1[j];
+        arr1[j]=arr1[j+1];
+        arr1[j+1]=swapx;
+        
+        swapy=arr2[j];
+        arr2[j]=arr2[j+1];
+        arr2[j+1]=swapy;
+       }
+     }
+    }
+ }
+
+//function to calculate distance
+float distance(int x1,int x2,int y1,int y2)
+{ 
+ //printf("\nEnter distance\n");
+ float d=sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1));
+ return d;
+}
+
+//function to find out closest points
+float closest(int *x,int *y, int n)
+{
+  float dl,dr,d;
+  int i,j;
+  if(n<=3)//no need to divide any further
+  {  float dmin=distance(x[0],x[1],y[0],y[1]);
+     for(i=0;i<n;i++)
+     {
+       for(j=i+1;j<n;j++)
+       { if(distance(x[i],x[j],y[i],y[j])<dmin)
+           dmin=distance(x[i],x[j],y[i],y[j]);
+     } }
+     return dmin;
+   }
+
+dl=closest(x,y,n/2);
+dr=closest(x+(n/2),y+(n/2),n-(n/2));
+
+//find the least of dl and dr
+if(dl<dr)
+ d=dl;
+else d=dr;
+
+//checking the distances of points near the median
+int mid=n/2; float dt=5000;
+
+int u=mid-ceil(d);// median-d
+int l=mid+ceil(d);//median+d
+//int midstrip[u+l+1];
+
+for(i=u;i<l;i++)
+{
+ for(j=i+1;j<l;j++)
+ {
+   if(distance(x[i],x[j],y[i],y[j])<dt)
+           dt=distance(x[i],x[j],y[i],y[j]);
+ }
+}
+
+//printf("\n%f%f%f%f\n",dl,dr,d,dt);
+
+if(d<dt)
+return d;
+else return dt;
+
+
+}
+
+
+
+/* TIME COMPLEXITY
+
+*/

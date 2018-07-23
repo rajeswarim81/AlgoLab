@@ -1,0 +1,4 @@
+Acquire::http::proxy "http://172.16.2.30:8080/";
+Acquire::https::proxy "https://172.16.2.30:8080/";
+Acquire::ftp::proxy "ftp://172.16.2.30:8080/";
+Acquire::socks::proxy "socks://172.16.2.30:8080/"; 
